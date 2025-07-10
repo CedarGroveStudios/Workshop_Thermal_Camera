@@ -275,7 +275,7 @@ class Display:
             histo_scale = 1
 
         # Display the histogram
-        for _col in range(self._grid_axis)[0]:
+        for _col in range(self._grid_axis[0]):
             for _row in range(self._grid_axis[1]):
                 if histogram[_col] / histo_scale > self._grid_axis[0] - 1 - _row:
                     self.image_group[

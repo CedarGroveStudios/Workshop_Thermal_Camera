@@ -203,7 +203,7 @@ def capture_grid_and_upload():
     # Build the Grid Image Data
     grid_bmp_data = b""  # Create blank byte array
     for _row in range(height - 1, -1, -1):
-        _row_colors = display.fetch_grid_row_bgr_colors(_row, selfie=SELFIE)
+        _row_colors = display.fetch_grid_row_bgr_colors(_row, selfie=SELFIE & DISPLAY_IMAGE)
         grid_bmp_data += _row_colors
     # Convert to base 64 and send to AIO
     _send_b64_to_aio(bmp_header + dib_header + grid_bmp_data)
