@@ -39,8 +39,9 @@ def fahrenheit_to_celsius(deg_f=None):
 
 
 # --- SYSTEM PARAMETERS ---
-BRIGHTNESS = 1.0  # 0.0 (min) to 1.0 (max)
-AUTO_DISPLAY_BRIGHT = True  # Use sensor to adjust per ambient lighting
+BRIGHTNESS = 1.0  # Display and NeoPixel max brightness; 0.0 (min) to 1.0 (max)
+AUTO_BRIGHTNESS = True  # Use sensor to adjust per ambient lighting
+
 DISPLAY_IMAGE = True  # Display mode; True for image, False for histogram
 SELFIE = True  # Screen orientation; True for forward-facing camera
 
@@ -55,6 +56,7 @@ LOCAL_TIME_UPDATE = 0  # Once per hour at the top of the hour
 IMAGE_UPLOAD_PERIOD = 20  # Every 20 minutes and once at startup
 
 # Default motion threshold, alarm, and min/max range values
+AUTO_RANGE = True
 ALARM_F = 120
 MIN_RANGE_F = 60
 MAX_RANGE_F = 120
@@ -70,8 +72,8 @@ FETCH = Colors.YELLOW
 ERROR = Colors.RED
 
 # --- CONNECT PERIPHERALS ---
-# Instantiate the AMG8833 thermal camera module; 0 to 80C, autofocus, interpolate
-camera = CameraAMG88xx(auto_focus=True, interpolate=True)
+# Instantiate AMG8833 thermal camera; 0 to 80C, auto range, interpolate
+camera = CameraAMG88xx(auto_range=AUTO_RANGE, interpolate=True)
 
 # Instantiate the display and load a sample spectrum
 display = Display(
@@ -144,7 +146,7 @@ def adjust_brightness():
     to BRIGHTNESS when the ambient light level falls between 5 and 200 lux.
     Full-scale raw light sensor value (65535) is approximately 1500 Lux."""
     global old_brightness
-    if not AUTO_DISPLAY_BRIGHT:
+    if not AUTO_BRIGHTNESS:
         return
     raw = 0
     for i in range(20):

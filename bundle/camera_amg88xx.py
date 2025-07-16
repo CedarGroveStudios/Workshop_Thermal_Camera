@@ -13,16 +13,16 @@ import adafruit_amg88xx
 
 
 class CameraAMG88xx:
-    def __init__(self, temp_range_c=(0, 80), auto_focus=True, interpolate=True):
+    def __init__(self, temp_range_c=(0, 80), auto_range=True, interpolate=True):
         """Initialize the CameraAMG88xx object.
         :param tuple temp_range_c: The camera's temperature range in Celsius.
           Defaults to the AMG88xx specification of 0 to 80 degrees Celsius.
-        :param bool auto_focus: The autofocus enable state.
+        :param bool auto_range: The auto ranging enable state.
           Defaults to True (enabled).
         :param bool interpolate: Enable linear interpolation. Defaults to True."""
         self._range_min_c = temp_range_c[0]
         self._range_max_c = temp_range_c[1]
-        self._auto_focus = auto_focus
+        self._auto_focus = auto_range
         self._interpolate = interpolate
 
         self._sensor_axis = [8, 8]  # The size of the sensor element array axis (8x8)
